@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Leaderboard</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+    <nav>
+
+        <div class="logo">
+            🎓 StudentRank
+        </div>
+
+        <a href="/">
+            Add Student ➕
+        </a>
+
+    </nav>
+
+
+    <div class="leaderboard-container">
+
+        <h1>🏆 Live Student Leaderboard</h1>
+
+        <p class="subtitle">
+            Students ranked according to their SGPA / CGPA
+        </p>
+
+
+        <div class="table-card">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Rank</th>
+
+                        <th>Student</th>
+
+                        <th>Enrollment</th>
+
+                        <th>Semester</th>
+
+                        <th>SGPA / CGPA</th>
+
+                        <th>Marksheet</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                    {% for student in students %}
+
+                    <tr>
+
+                        <td>
+
+                            {% if student.rank == 1 %}
+
+                            🥇
+
+                            {% elif student.rank == 2 %}
+
+                            🥈
+
+                            {% elif student.rank == 3 %}
+
+                            🥉
+
+                            {% else %}
+
+                            #{{ student.rank }}
+
+                            {% endif %}
+
+                        </td>
+
+
+                        <td class="student-name">
+
+                            {{ student.name }}
+
+                        </td>
+
+
+                        <td>
+
+                            {{ student.enrollment }}
+
+                        </td>
+
+
+                        <td>
+
+                            {{ student.semester }}
+
+                        </td>
+
+
+                        <td class="score">
+
+                            {{ student.sgpa }}
+
+                        </td>
+
+
+                        <td>
+
+                            <span class="uploaded">
+
+                                ✓ Uploaded
+
+                            </span>
+
+                        </td>
+
+                    </tr>
+
+                    {% else %}
+
+                    <tr>
+
+                        <td colspan="6">
+
+                            No students added yet.
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
